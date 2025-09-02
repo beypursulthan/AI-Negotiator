@@ -17,6 +17,21 @@ const NegotiationParty: React.FC<NegotiationPartyProps> = ({ partyName, input, s
     setInput({ ...input, [field]: value });
   };
 
+  const placeholders = {
+    A: {
+      position: `e.g., "I am asking for an annual salary of $110,000."`,
+      interests: `e.g., "To match my market value, cover increased living costs, and reflect my new responsibilities."`,
+      constraints: `e.g., "My goal is to also secure a comprehensive benefits package and a clear path for promotion."`,
+    },
+    B: {
+      position: `e.g., "We are offering a starting salary of $95,000."`,
+      interests: `e.g., "We need to stay within our Q3 budget for this role while attracting top talent."`,
+      constraints: `e.g., "The maximum salary for this pay band is $105,000, but we can offer a significant performance bonus and a professional development budget."`,
+    },
+  };
+
+  const currentPlaceholders = placeholders[partyName];
+
   return (
     <div className={`bg-slate-800 rounded-lg shadow-lg w-full border-t-4 ${color}`}>
       <div className="p-6">
@@ -30,7 +45,7 @@ const NegotiationParty: React.FC<NegotiationPartyProps> = ({ partyName, input, s
               id={`position-${partyName}`}
               rows={3}
               className="w-full bg-slate-700 text-white rounded-md border border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2 transition"
-              placeholder={`e.g., "I want the entire orange."`}
+              placeholder={currentPlaceholders.position}
               value={input.position}
               onChange={(e) => handleInputChange('position', e.target.value)}
             />
@@ -43,7 +58,7 @@ const NegotiationParty: React.FC<NegotiationPartyProps> = ({ partyName, input, s
               id={`interests-${partyName}`}
               rows={4}
               className="w-full bg-slate-700 text-white rounded-md border border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2 transition"
-              placeholder={`e.g., "I need the pulp to make juice because I am thirsty."`}
+              placeholder={currentPlaceholders.interests}
               value={input.interests}
               onChange={(e) => handleInputChange('interests', e.target.value)}
             />
@@ -56,7 +71,7 @@ const NegotiationParty: React.FC<NegotiationPartyProps> = ({ partyName, input, s
               id={`constraints-${partyName}`}
               rows={3}
               className="w-full bg-slate-700 text-white rounded-md border border-slate-600 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 p-2 transition"
-              placeholder={`e.g., "I must have the juice within the hour."`}
+              placeholder={currentPlaceholders.constraints}
               value={input.constraints}
               onChange={(e) => handleInputChange('constraints', e.target.value)}
             />
